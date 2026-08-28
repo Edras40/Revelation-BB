@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#FBF3E4">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="¿Niño o Niña?">
 <title>¿Niño o Niña? · Invitación</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -744,6 +749,12 @@
     d.addEventListener('click', function(){ renderSlide(parseInt(d.dataset.i, 10)); });
   });
 
+  function tryFullscreen(){
+    var el = document.documentElement;
+    var req = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+    if(req){ try{ req.call(el); }catch(e){} }
+  }
+
   function openInvite(){
     if(opened) return;
     opened = true;
@@ -753,6 +764,7 @@
     soundBtn.classList.add('visible');
     startMusic();
     launchConfetti();
+    tryFullscreen();
   }
   cover.addEventListener('click', openInvite);
   cover.addEventListener('touchend', function(e){ e.preventDefault(); openInvite(); }, {passive:false});
